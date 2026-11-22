@@ -1,0 +1,29 @@
+name: AE86SpeedChime
+options:
+  bundleIdPrefix: com.ae86chime
+  deploymentTarget:
+    iOS: "16.0"
+targets:
+  AE86SpeedChime:
+    type: application
+    platform: iOS
+    sources:
+      - path: AE86SpeedChime
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.ae86chime.cluster
+        INFOPLIST_KEY_CFBundleDisplayName: "AE86 Chime"
+        INFOPLIST_KEY_NSLocationWhenInUseUsageDescription: "주행 속도를 실시간으로 측정하여 설정한 기준 속도 초과 시 AE86 차임벨을 울리기 위해 위치 권한이 필요합니다."
+        INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription: "iPhone 화면이 잠겨 있거나 다른 내비게이션 앱을 띄운 상태에서도 백그라운드에서 속도를 측정하고 차임벨을 울리기 위해 '항상 허용' 위치 권한이 필요합니다."
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGNING_ALLOWED: NO
+        CODE_SIGNING_REQUIRED: NO
+    info:
+      path: AE86SpeedChime/Info.plist
+      properties:
+        UILaunchScreen: {}
+        UIBackgroundModes:
+          - location
+          - audio
+        NSLocationWhenInUseUsageDescription: "주행 속도를 실시간으로 측정하여 설정한 기준 속도 초과 시 AE86 차임벨을 울리기 위해 위치 권한이 필요합니다."
+        NSLocationAlwaysAndWhenInUseUsageDescription: "iPhone 화면이 잠겨 있거나 다른 내비게이션 앱을 띄운 상태에서도 백그라운드에서 속도를 측정하고 차임벨을 울리기 위해 '항상 허용' 위치 권한이 필요합니다."
