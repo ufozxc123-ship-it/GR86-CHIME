@@ -1,0 +1,39 @@
+name: Build unsigned iOS IPA for AltStore
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Show Xcode version
+        run: xcodebuild -version
+
+      - name: Build unsigned app
+        run: |
+          xcodebuild \
+            -project AE86SpeedChime.xcodeproj \
+            -scheme AE86SpeedChime \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Package unsigned IPA
+        run: |
+          mkdir -p ipa/Payload
+          cp -R build/Build/Products/Release-iphoneos/AE86SpeedChime.app ipa/Payload/
+          cd ipa
+          /usr/bin/zip -qry AE86SpeedChime-unsigned.ipa Payload
+
+      - name: Upload IPA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: AE86SpeedChime-unsigned-IPA
+          path: ipa/AE86SpeedChime-unsigned.ipa
+          retention-days: 14
